@@ -1,0 +1,108 @@
+@charset "utf-8";
+@import "../icon/iconfont.css";
+/*
+* 通用类
+*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: "Microsoft YaHei";
+  font-size: 12px;
+  color: #333333;
+  background-color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+a:hover {
+  color: #dd1827;
+}
+a:focus {
+  outline: none;
+}
+em,
+i {
+  font-style: normal;
+}
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+/**
+ * 通用类
+ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+img {
+  display: block;
+  vertical-align: bottom;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  zoom: 1;
+  height: 0;
+}
+.t-red {
+  color: #ee3434;
+}
+.b-yellow {
+  background: #FC7546 none repeat scroll 0 0;
+  color: white!important;
+}
+.page1200 {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.show{
+  display: block;
+}
+.hide {
+  display: none;
+}
+.btn {
+  display: inline-block;
+}
+.btn-big {
+  padding: 10px 50px;
+  font-size: 36px;
+  border-radius: 24px;
+}
+.btn-yellow {
+  color: #ffffff;
+  background-color: #df650f;
+  transition: background-color .3s ease;
+}
+.btn-yellow:hover {
+  color: #ffffff;
+  background-color: #df460f;
+}
