@@ -1,0 +1,64 @@
+<template>
+  <div class="page1200 clearfix">
+    <aside class="qc-menu fl">
+      <figure>
+        <img src="../assets/images/company.jpg" alt="">
+        <figcaption>深圳齐心集团</figcaption>
+      </figure>
+      <dl class="qc-menu-list">
+        <dt class="qc-menu-item">
+          我的白条
+          <i></i>
+        </dt>
+      </dl>
+    </aside>
+    <router-view class="fl"></router-view>
+  </div>
+</template>
+<style lang="less">
+  .qc-menu {
+    width: 266px;
+    figure {
+      width: inherit;
+      height: 248px;
+      padding-top: 46px;
+      background-color: #ed7248;
+      text-align: center;
+      img {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 16px;
+        border-radius: 60px;
+      }
+      figcaption {
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+      }
+    }
+    .qc-menu-list {
+      width: inherit;
+      min-height: 434px;
+      background-color: #e5e5e4;
+      .qc-menu-item {
+        position: relative;
+        width: 100%;
+        height: 54px;
+        line-height: 54px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        background-color: #f7d1c3;
+        cursor: pointer;
+        i {
+          position: absolute;
+          right: 58px;
+          top: 21px;
+          width: 11px;
+          height: 14px;
+          background-image: url("../assets/images/arrow.png");
+        }
+      }
+    }
+  }
+</style>

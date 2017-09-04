@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <q-header></q-header>
     <router-view></router-view>
     <q-footer></q-footer>
