@@ -58,6 +58,30 @@ p {
   margin: 0;
   padding: 0;
 }
+input,button{
+  border: none;
+}
+.font14{
+  font-size: 14px;
+}
+.font16{
+  font-size: 16px;
+}
+.font18{
+  font-size: 18px;
+}
+.font20{
+  font-size: 20px;
+}
+.font40{
+  font-size: 40px;
+}
+.color_393a{
+  color: #393a3a;
+}
+h1, h2, h3, h4, h5, h6{
+  font-weight: normal;
+}
 .fl {
   float: left;
 }
@@ -97,12 +121,60 @@ p {
   font-size: 36px;
   border-radius: 24px;
 }
+.btn-mid {
+  padding: 8px 16px;
+  font-size: 20px;
+  border-radius: 6px;
+}
 .btn-yellow {
   color: #ffffff;
   background-color: #df650f;
   transition: background-color .3s ease;
+  &:hover {
+    color: #ffffff;
+    background-color: #df460f;
+  }
 }
-.btn-yellow:hover {
+.btn-red {
   color: #ffffff;
-  background-color: #df460f;
+  background-color: #ee3434;
+  transition: background-color .3s ease;
+  &:hover {
+    color: #ffffff!important;
+    background-color: #b41521;
+    transition: background-color .3s ease;
+  }
 }
+
+/**
+ * 白条信息展示
+ */
+.bg-verify {
+  padding: 90px 64px;
+  width: 934px;
+  height: 681px;
+  background-color: #fef4ea;
+  .v-msg {
+    font-size: 20px;
+  }
+  .reason {
+    margin-top: 20px;
+    padding: 22px 0;
+    width: 400px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    word-break: break-all;
+    color: #333333;
+  }
+  .link-group {
+    padding-top: 32px;
+    a {
+      margin-right: 46px;
+      font-size: 20px;
+      color: #ee3434;
+      text-decoration: underline;
+    }
+  }
+}
+

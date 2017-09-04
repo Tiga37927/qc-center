@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import view from '@/views'
 
 const {NotFoundComponent, Center} = view
+
 Vue.use(Router)
 
 export default new Router({
@@ -12,11 +13,23 @@ export default new Router({
       path: '/',
       name: 'Center',
       component: Center,
+      // 嵌套路由
       children: [
         {
-          // 嵌套路由
           path: 'apply',
           component: resolve => require(['@/views/Apply.vue'], resolve)
+        },
+        {
+          path: 'notAply',
+          component: resolve => require(['@/views/NotAply.vue'], resolve)
+        },
+        {
+          path: 'verify',
+          component: resolve => require(['@/views/Verify.vue'], resolve)
+        },
+        {
+          path: 'verifyfail',
+          component: resolve => require(['@/views/VerifyFail.vue'], resolve)
         },
         {
           path: '/lous',
