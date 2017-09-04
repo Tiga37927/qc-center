@@ -1,6 +1,6 @@
 <template>
   <div class="bg-verify">
     <span class="v-msg">您还未开通白条。</span>
-    <a href="javascript:;" class="btn btn-mid btn-red">申请开通</a>
+    <router-link class="btn btn-mid btn-red" to="apply">申请开通</router-link>
   </div>
 </template>

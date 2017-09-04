@@ -1,6 +1,6 @@
 <template>
   <div class="page1200 clearfix">
-    <aside class="qc-menu fl">
+    <aside class="qc-menu">
       <figure>
         <img src="../assets/images/company.jpg" alt="">
         <figcaption>深圳齐心集团</figcaption>
@@ -12,12 +12,16 @@
         </dt>
       </dl>
     </aside>
-    <router-view class="fl"></router-view>
+    <router-view class="q-content"></router-view>
   </div>
 </template>
 <style lang="less">
   .qc-menu {
+    position: absolute;
+    left: 0;
     width: 266px;
+    height: 100%;
+    background-color: #e5e5e4;
     figure {
       width: inherit;
       height: 248px;
@@ -39,7 +43,6 @@
     .qc-menu-list {
       width: inherit;
       min-height: 434px;
-      background-color: #e5e5e4;
       .qc-menu-item {
         position: relative;
         width: 100%;
@@ -60,5 +63,8 @@
         }
       }
     }
+  }
+  .q-content {
+    margin-left: 266px!important;
   }
 </style>

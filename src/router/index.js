@@ -33,7 +33,30 @@ export default new Router({
         },
         {
           path: '/lous',
-          component: resolve => require(['@/views/Lous.vue'], resolve)
+          component: resolve => require(['@/views/Lous.vue'], resolve),
+          beforeEnter: (to, from, next) => {
+            let arr = [1, 2, 3]
+            let num = arr[Math.ceil(Math.random() * 10 / 3)]
+            switch (num) {
+              case 1:
+                next({
+                  path: '/verify'
+                })
+                break
+              case 2:
+                next({
+                  path: '/verifyfail'
+                })
+                break
+              case 3:
+                next({
+                  path: '/notAply'
+                })
+                break
+              default:
+                next()
+            }
+          }
         }
       ]
     },

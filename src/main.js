@@ -6,7 +6,16 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-
+Vue.mixin({
+  created: function () {
+    console.log('component hook called')
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
+    }
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
