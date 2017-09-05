@@ -1,3 +1,4 @@
+<!--未开通-->
 <template>
   <div class="bg-verify">
     <span class="v-msg">您还未开通白条。</span>

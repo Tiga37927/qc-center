@@ -96,6 +96,27 @@ h1, h2, h3, h4, h5, h6{
   zoom: 1;
   height: 0;
 }
+.mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  opacity: .2;
+  filter: alpha(opacity=20);
+  z-index: 99;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  z-index: 999;
+}
 .t-red {
   color: #ee3434;
 }
@@ -193,3 +214,11 @@ h1, h2, h3, h4, h5, h6{
   }
 }
 
+.overfl-oneline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.bg_fff {
+  background: #fff;
+}

@@ -1,3 +1,4 @@
+<!--申请页面-->
 <template>
   <div class="open-form">
     <fieldset class="">
@@ -7,47 +8,47 @@
           <em class="t-red">*</em>
           公司全称：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="companyName" readonly>
       </label>
       <label class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           公司所在区域：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="area" readonly>
       </label>
       <label class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           公司详细地址：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="address" readonly>
       </label>
       <label class="t-label">
         <div class="txt">
           企业人数：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="enterprisePerNum">
       </label>
       <label class="t-label">
         <div class="txt">
           公司性质：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="enterpriseNature">
       </label>
       <label class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           法人姓名：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="legalPerson">
       </label>
       <label class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           身份证号：
         </div>
-        <input class="t-input" type="text">
+        <input class="t-input" type="text" v-model="legalPersonId">
       </label>
     </fieldset>
     <fieldset>
@@ -56,7 +57,13 @@
         <div class="txt">
           授信额度：
         </div>
-        <span>￥1000.00</span>
+        <input class="t-input" type="text" v-model="applyAmout">
+      </label>
+      <label class="t-label">
+        <div class="txt">
+          账期日：
+        </div>
+        <input class="t-input" type="text" v-model="billDay">
       </label>
     </fieldset>
     <fieldset>
@@ -68,7 +75,7 @@
           <em class="t-red">*</em>
           营业执照副本：
         </div>
-        <input class="f-input" type="file">
+        <q-up-load class="f-input"></q-up-load>
         <span class="q-icon" tips="营业执照（副本）复印件需加盖公司公章并注明“仅供齐采网开白条月结使用”"></span>
       </div>
       <div class="t-label">
@@ -93,9 +100,50 @@
   </div>
 </template>
 <script>
+  import urls from '../api/urls'
+  import http from '../api/http'
+  import {QUpLoad} from '../components'
   export default {
-    created () {
-      this.hello()
+    components: {
+      QUpLoad
+    },
+    data: function () {
+      return {
+        companyName: '',
+        area: '',
+        address: '',
+        enterprisePerNum: '',
+        enterpriseNature: '',
+        legalPersonId: '',
+        legalPerson: '',
+        applyAmout: 1000,
+        billDay: '',
+        businessLicenseActualFileName: '',
+        businessLicenseOriginalFileName: '',
+        iouAgreementActualFileName: '',
+        iouAgreementOriginalFileName: '',
+        idCardActualFileName: '',
+        idCardOriginalFileName: ''
+      }
+    },
+    mounted () {
+      this.init()
+    },
+    methods: {
+      init () {
+        let _this = this
+        let opt = {
+          method: 'get',
+          url: urls.personInfo.dataUrl,
+          isLoading: false,
+          success: function (data) {
+            _this.companyName = data.companyName
+            _this.area = data.area
+            _this.address = data.address
+          }
+        }
+        http(opt)
+      }
     }
   }
 </script>
@@ -128,6 +176,10 @@
           height: 32px;
           border: 1px solid #d6d6d6;
           padding-left: 4px;
+        }
+        .f-input {
+          display: inline-block;
+          width: 253px;
         }
         .q-icon {
           display: inline-block;

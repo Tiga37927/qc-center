@@ -4,16 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import showLoading from './mixins/Loading'
+import tips from './mixins/Tips'
 
 Vue.config.productionTip = false
+// 全局混入
 Vue.mixin({
   created: function () {
-    console.log('component hook called')
   },
   methods: {
-    hello: function () {
-      console.log('hello from mixin!')
-    }
+    showLoading,
+    tips
   }
 })
 /* eslint-disable no-new */

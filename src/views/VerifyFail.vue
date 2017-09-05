@@ -1,3 +1,4 @@
+<!--审核未通过-->
 <template>
   <div class="bg-verify">
     <span class="v-msg">很抱歉，您的白条申请没有通过。</span>

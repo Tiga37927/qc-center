@@ -1,3 +1,6 @@
+/**
+ * Created by yx on 2017/9/5.
+ */
 let timer = null
 
 export default function (str, delay) {
@@ -11,7 +14,7 @@ export default function (str, delay) {
     showTips.id = 'showTips'
     const style = {
       background: 'black',
-      padding: '1rem 1rem',
+      padding: '.2rem .4rem',
       color: '#fff',
       position: 'fixed',
       top: '50%',

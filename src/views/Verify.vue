@@ -1,3 +1,4 @@
+<!--审核中-->
 <template>
   <div class="bg-verify">
     <span class="v-msg">您的白条正在审核中，一般1个工作日内审核完成。</span>

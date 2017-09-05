@@ -1,46 +1,29 @@
 import axios from 'axios'
-import qs from 'qs'
 import showLoading from '../components/Loading'
 import showTips from '../components/ShowTips'
 
-export default function fetch (opt) {
-	var http = null;
-
-	//	配置loading
-	if (opt.isNeedLoading) {
-		showLoading(true)
-	}
-	
-	if (opt.type.toLocaleLowerCase() === 'get') {
-		http = axios({
-			method: 'get',
-			url: opt.url,
-			params: opt.data
-		})
-	}
-	else {
-		http = axios({
-			method: 'post',
-			url: opt.url,
-			data: qs.stringify(opt.data)
-		})
-	}
-
-	return new Promise(function (resolve, reject) {
-		http.then(function (res) {
-			showLoading(false)
-			if (res.data.success) {
-				resolve(res.data)
-			}
-			else {
-				reject(res.data)
-				showTips(opt.errMsg)
-			}
-		})
-		.catch(function (err) {
-			showLoading(false)
-			reject(err)
-			showTips(opt.errMsg)
-		})
-	})
+export default function (opt) {
+  // 配置loading
+  if (opt.isLoading) {
+    showLoading(true)
+  }
+  let http = axios({
+    method: opt.method.toLocaleLowerCase() || 'get',
+    url: opt.url,
+    data: opt.data
+  }).then(function (response) {
+    let result = response.data
+    showLoading(false)
+    if (result.success && result.success === true) {
+      opt.success(result.data)
+    } else if (result.success && result.success === true) {
+      opt.fail(result.data)
+      showTips(result.msg)
+    }
+  }).catch(function (err) {
+    showLoading(false)
+    opt.fail(err)
+    showTips('请求异常，请联系客服人员处理！', 3000)
+  })
+  return http
 }
