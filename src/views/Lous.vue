@@ -1,9 +1,9 @@
 <template>
   <div class="lous_container">
     <div class="lous_container_top">
-      <lous-title></lous-title>
+      <lous-title @to-pay="toPay" :base-info="getLousBaseInfo"></lous-title>
 
-      <bill-box></bill-box>
+      <bill-box :base-info="getLousBaseInfo"></bill-box>
     </div>
 
     <!-- 白条账单 -->
@@ -72,13 +72,17 @@ import {
   Pagination
 } from '../components'
 
+import { mapActions, mapGetters } from 'vuex'
+import configUrl from '../api/urls'
+
 export default {
   data () {
     return {
       tabList: ['已出账单', '未出账单', '还款流水', '退款记录', '消费明细'],    //  选项卡数组
       tabIndex: 0,     //  选项卡记录切换索引
       totalPage: 20,    //  总页数
-      currentPage: 1   //  当前页
+      currentPage: 1,   //  当前页
+      lousBaseInfoUrl: configUrl.lousBaseInfo.dataUrl     //  白条基础信息URL
     }
   },
   components: {
@@ -93,7 +97,14 @@ export default {
     ConsumptionDetails,
     Pagination
   },
+  created () {
+    //  获取白条基本信息
+    this.checkLousBaseInfo()
+  },
   methods: {
+    //  vuex actions
+    ...mapActions(['lousBaseInfo']),
+
     //  修改选项卡索引
     changeTabIndex (index) {
       //  console.log(index)
@@ -105,7 +116,37 @@ export default {
     changeCallback (page) {
       console.log('页码：' + page)
       this.currentPage = page
+    },
+
+    //  跳转详情
+    toPay () {
+      this.$router.push({
+        name: 'pay'
+      })
+    },
+
+    //  获取白条基本信息
+    checkLousBaseInfo () {
+      let opt = {
+        isLoading: false,
+        type: 'post',
+        url: this.lousBaseInfoUrl,
+        data: {},
+        errMsg: '获取白条基础信息失败',
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      }
+
+      this.lousBaseInfo(opt)
     }
+  },
+
+  computed: {
+    ...mapGetters(['getLousBaseInfo'])
   }
 }
 </script>

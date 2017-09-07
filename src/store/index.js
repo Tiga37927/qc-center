@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import cart from './modules/demo'
+import lous from './modules/lous'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    cart
+    cart,
+    lous
   }
 })

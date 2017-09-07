@@ -14,11 +14,10 @@ export default function (opt) {
   }).then(function (response) {
     let result = response.data
     showLoading(false)
-    if (result.success && result.success === true) {
-      opt.success(result.data)
-    } else if (result.success && result.success === true) {
-      opt.fail(result.data)
-      showTips(result.msg)
+    if (result.success === true) {
+      opt.success(result)
+    } else if (result.success === false) {
+      opt.fail(result)
     }
   }).catch(function (err) {
     showLoading(false)

@@ -3,7 +3,7 @@
     <div class="q-site">
       <div class="page1200">
         <div class="locate">
-          <i class="iconfont icon-zuobiaofill"></i>
+          <i class="iconfont icon-locationfill"></i>
           地区：深圳市
         </div>
         <ul class="nav-list">

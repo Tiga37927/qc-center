@@ -10,7 +10,10 @@ import RefundRecord from './RefundRecord'
 import ConsumptionDetails from './ConsumptionDetails'
 import NoBill from './NoBill'
 import Pagination from './Pagination'
+import RepaymentDetails from './RepaymentDetails'
+import PayMethods from './PayMethods'
 import QUpLoad from './QUpLoad'
+import QProgress from './QProgress'
 
 export {
   LousTitle,
@@ -25,5 +28,8 @@ export {
   RefundRecord,
   ConsumptionDetails,
   Pagination,
-  QUpLoad
+  RepaymentDetails,
+  PayMethods,
+  QUpLoad,
+  QProgress
 }

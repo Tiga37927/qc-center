@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import view from '@/views'
 // import axios from 'axios'
-import urls from '../api/urls'
-import http from '../api/http'
+// import urls from '../api/urls'
+// import http from '../api/http'
 
 const {NotFoundComponent, Center} = view
 
@@ -20,29 +20,29 @@ export default new Router({
       children: [
         {
           path: 'apply',
-          component: resolve => require(['@/views/Apply.vue'], resolve),
-          beforeEnter: (to, from, next) => {
-            let opt = {
-              method: 'get',
-              url: urls.isNeedEditCompanyInfo.dataUrl,
-              isLoading: true,
-              success: function (data) {
-                let result = data.isNeed
-                // 是否需要完善公司信息
-                if (result === false) {
-                  next()
-                } else if (result === true) {
-                  next({
-                    path: '/forbidAply'
-                  })
-                }
-              },
-              fail: function (error) {
-                console.log(error)
-              }
-            }
-            http(opt)
-          }
+          component: resolve => require(['@/views/Apply.vue'], resolve)
+          // beforeEnter: (to, from, next) => {
+          //   let opt = {
+          //     method: 'get',
+          //     url: urls.isNeedEditCompanyInfo.dataUrl,
+          //     isLoading: true,
+          //     success: function (res) {
+          //       let result = res.data.isNeed
+          //       // 是否需要完善公司信息
+          //       if (result === false) {
+          //         next()
+          //       } else if (result === true) {
+          //         next({
+          //           path: '/forbidAply'
+          //         })
+          //       }
+          //     },
+          //     fail: function (error) {
+          //       console.log(error)
+          //     }
+          //   }
+          //   http(opt)
+          // }
         },
         {
           path: 'forbidAply',
@@ -61,15 +61,15 @@ export default new Router({
           component: resolve => require(['@/views/VerifyFail.vue'], resolve)
         },
         {
-          path: '/lous',
-          component: resolve => require(['@/views/Lous.vue'], resolve),
-          beforeEnter: (to, from, next) => {
+          path: 'lous',
+          component: resolve => require(['@/views/Lous.vue'], resolve)//  ,
+          /*  beforeEnter: (to, from, next) => {
             let opt = {
               method: 'get',
               url: urls.getIouStatus.dataUrl,
               isNeedLoading: true,
-              success: function (data) {
-                let result = data.status
+              success: function (res) {
+                let result = res.data.status
                 switch (result) {
                   case 'CREDIT_ACCOUNT_APPLY_REQUESTED':
                     next({
@@ -96,18 +96,31 @@ export default new Router({
             }
 
             http(opt)
-          }
+          } */
+        },
+        // 申请页成功面
+        {
+          path: 'aplySuccess',
+          name: 'aplySuccess',
+          component: resolve => require(['@/views/AplySuccess.vue'], resolve)
         }
       ]
     },
     {
-      // 嵌套路由
-      path: '/hello',
-      component: resolve => require(['@/components/Hello.vue'], resolve)
-    },
-    {
       path: '*',
       component: NotFoundComponent
+    },
+    //  支付页面
+    {
+      path: '/pay',
+      name: 'pay',
+      component: resolve => require(['@/views/Pay.vue'], resolve)
+    },
+    //  支付页成功面
+    {
+      path: '/paySuccess',
+      name: 'paySuccess',
+      component: resolve => require(['@/views/PaySuccess.vue'], resolve)
     }
   ]
 })

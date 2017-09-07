@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import showLoading from './mixins/Loading'
 import tips from './mixins/Tips'
+import initNumber from './filter/initNumber'
+
+Vue.filter('initNumber', initNumber)
 
 Vue.config.productionTip = false
 // 全局混入

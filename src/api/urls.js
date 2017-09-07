@@ -25,5 +25,9 @@ export default {
   // 查询用户个人信息
   personInfo: {
     dataUrl: prefix + '/iou/creditAccount/personInfo'
+  },
+  //  白条基础信息
+  lousBaseInfo: {
+    dataUrl: prefix + '/iou/creditAccount/baseIouInfo'
   }
 }

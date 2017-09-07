@@ -75,34 +75,52 @@
           <em class="t-red">*</em>
           营业执照副本：
         </div>
-        <q-up-load class="f-input"></q-up-load>
-        <span class="q-icon" tips="营业执照（副本）复印件需加盖公司公章并注明“仅供齐采网开白条月结使用”"></span>
+        <q-up-load class="f-input"
+                   :accept="'image/*'"
+                   :action="upUrl"
+                   :onSuccess="sucBusiness"
+                   :onError="errBusiness">
+        </q-up-load>
+        <span class="q-icon" @click="tips('营业执照（副本）复印件需加盖公司公章并注明“仅供齐采网开白条月结使用', 3000)"></span>
       </div>
       <div class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           经办人省份证明：
         </div>
-        <input class="f-input" type="file">
-        <span class="q-icon" tips="营业执照（副本）复印件需加盖公司公章并注明“仅供齐采网开白条月结使用”"></span>
+        <q-up-load class="f-input"
+                   :accept="'image/*'"
+                   :action="upUrl"
+                   :onSuccess="sucAgreement"
+                   :onError="errAgreement">
+        </q-up-load>
+        <span class="q-icon" @click="tips('需上传身份证正反面复印件，并注明“仅供齐采网开白条月结使用”', 3000)"></span>
       </div>
       <div class="t-label">
         <div class="txt">
           <em class="t-red">*</em>
           齐采白条申请书：
         </div>
-        <input class="f-input" type="file">
-        <span class="q-icon" tips="营业执照（副本）复印件需加盖公司公章并注明“仅供齐采网开白条月结使用”"></span>
-        <a class="t-blue" target="_blank" href="http://www.17cai.com/images/template/iou_agreement_file.docx">下载白条申请书模板</a>
+        <q-up-load class="f-input"
+                   :accept="'image/*'"
+                   :action="upUrl"
+                   :onSuccess="sucCard"
+                   :onError="errCard">
+        </q-up-load>
+        <span class="q-icon" @click="tips('请申请书2页一起拍照上传', 3000)"></span>
+        <a class="t-blue" target="_blank"
+           href="http://www.17cai.com/images/template/iou_agreement_file.docx">下载白条申请书模板</a>
       </div>
     </fieldset>
-    <button class="btn btn-sub">立即申请</button>
+    <button v-show="!isSub" class="btn btn-sub" @click="aply">立即申请</button>
+    <button v-show="isSub" class="btn btn-refused">正在提交，请等待...</button>
   </div>
 </template>
 <script>
   import urls from '../api/urls'
   import http from '../api/http'
-  import {QUpLoad} from '../components'
+  import { QUpLoad } from '../components'
+
   export default {
     components: {
       QUpLoad
@@ -123,7 +141,9 @@
         iouAgreementActualFileName: '',
         iouAgreementOriginalFileName: '',
         idCardActualFileName: '',
-        idCardOriginalFileName: ''
+        idCardOriginalFileName: '',
+        upUrl: urls.upload.dataUrl,
+        isSub: false
       }
     },
     mounted () {
@@ -136,13 +156,98 @@
           method: 'get',
           url: urls.personInfo.dataUrl,
           isLoading: false,
-          success: function (data) {
-            _this.companyName = data.companyName
-            _this.area = data.area
-            _this.address = data.address
+          success: function (res) {
+            _this.companyName = res.data.companyName
+            _this.area = res.data.area
+            _this.address = res.data.address
           }
         }
         http(opt)
+      },
+      aply () {
+        if (this.isSub) {
+          return
+        }
+        if (!this.legalPerson) {
+          this.tips('请填写法人姓名', 1000)
+          return
+        }
+        if (!this.legalPersonId) {
+          this.tips('请填写身份证号', 1000)
+          return
+        }
+        if (!this.businessLicenseActualFileName) {
+          this.tips('请上传营业执照', 1000)
+          return
+        }
+        if (!this.iouAgreementActualFileName) {
+          this.tips('请上传经办人身份证', 1000)
+          return
+        }
+        if (!this.idCardActualFileName) {
+          this.tips('请上传白条申请书', 1000)
+          return
+        }
+        const subData = {
+          companyName: this.companyName,
+          area: this.area,
+          address: this.address,
+          enterprisePerNum: this.enterprisePerNum,
+          enterpriseNature: this.enterpriseNature,
+          legalPersonId: this.legalPersonId,
+          legalPerson: this.legalPerson,
+          applyAmout: this.applyAmout,
+          billDay: this.billDay,
+          businessLicenseActualFileName: this.businessLicenseActualFileName,
+          businessLicenseOriginalFileName: this.businessLicenseOriginalFileName,
+          iouAgreementActualFileName: this.iouAgreementActualFileName,
+          iouAgreementOriginalFileName: this.iouAgreementOriginalFileName,
+          idCardActualFileName: this.idCardActualFileName,
+          idCardOriginalFileName: this.idCardOriginalFileName
+        }
+        this.isSub = true
+        let _this = this
+        let opt = {
+          method: 'post',
+          url: urls.apply.dataUrl,
+          data: subData,
+          success: function (res) {
+            _this.tips(res.msg, 2000)
+            setTimeout(() => {
+              _this.$router.push({ path: 'aplySuccess' })
+            }, 2000)
+            _this.isSub = false
+          },
+          fail: function (res) {
+            _this.tips(res.msg, 2000)
+            _this.isSub = false
+          }
+        }
+        http(opt)
+      },
+      sucBusiness (event, res) {
+        this.tips('上传成功！', 1000)
+        this.businessLicenseActualFileName = res.data.actualFileName
+        this.businessLicenseOriginalFileName = res.data.originalFileName
+      },
+      errBusiness (event, res) {
+        console.log(event, res)
+      },
+      sucAgreement (event, res) {
+        this.tips('上传成功！', 1000)
+        this.iouAgreementActualFileName = res.data.actualFileName
+        this.iouAgreementOriginalFileName = res.data.originalFileName
+      },
+      errAgreement (event, res) {
+        console.log(event, res)
+      },
+      sucCard (event, res) {
+        this.tips('上传成功！', 1000)
+        this.idCardActualFileName = res.data.actualFileName
+        this.idCardOriginalFileName = res.data.originalFileName
+      },
+      errCard (event, res) {
+        console.log(event, res)
       }
     }
   }
@@ -184,6 +289,7 @@
         .q-icon {
           display: inline-block;
           margin-left: 15px;
+          margin-right: 38px;
           width: 20px;
           height: 20px;
           cursor: pointer;
@@ -192,7 +298,7 @@
         }
       }
     }
-    .btn-sub {
+    .btn-sub, .btn-refused {
       margin-left: 200px;
     }
     .warn {

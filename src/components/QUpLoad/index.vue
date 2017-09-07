@@ -1,23 +1,161 @@
 <template>
-  <div>
-    <form ref="form" method="post" id="myForm" :action="url" enctype="multipart/form-data">
-      <input type="file" @change="up()">
-    </form>
+  <div class="up-box">
+    <input name="file" type="file" @change="handleChange" ref="input" :multiple="multiple" :accept="accept">
+    <span class="percent" v-show="!upSuccess && percentage > 0 && percentage < 100">{{percentage}}%</span>
+    <i v-show="upSuccess" class="up-suc iconfont icon-roundcheckfill"></i>
   </div>
 </template>
 <script>
-  import urls from '../../api/urls'
+  function noop () {
+  }
 
   export default {
+    props: {
+      accept: String,
+      multiple: Boolean,
+      withCredentials: Boolean,
+      action: {
+        type: String,
+        required: true
+      },
+      name: {
+        type: String,
+        default: 'file'
+      },
+      headers: {
+        type: Object,
+        default () {
+          return {}
+        }
+      },
+      onSuccess: {
+        type: Function,
+        default: noop
+      },
+      onProgress: {
+        type: Function,
+        default: noop
+      },
+      onError: {
+        type: Function,
+        default: noop
+      }
+    },
     data: function () {
       return {
-        url: urls.upload.dataUrl
+        upSuccess: false,
+        percentage: 0
       }
     },
     methods: {
-      up () {
-        this.$ref('form').submit()
+      handleChange (ev) {
+        const files = ev.target.files
+        if (!files) return
+        this.upSuccess = false
+        this.uploadFiles(files)
+//        this.$refs.input.value = null
+      },
+      uploadFiles (files) {
+        // 获取文件
+        let postFiles = Array.prototype.slice.call(files)
+        if (!this.multiple) { postFiles = postFiles.slice(0, 1) }
+
+        if (postFiles.length === 0) { return }
+
+        postFiles.forEach(rawFile => {
+          this.post(rawFile)
+        })
+      },
+      post (rawFile) {
+        if (typeof XMLHttpRequest === 'undefined') {
+          return
+        }
+        const xhr = new XMLHttpRequest()
+        const action = this.action
+        if (xhr.upload) {
+          xhr.upload.onprogress = (e) => {
+            if (e.total > 0) {
+              e.percent = e.loaded / e.total * 100
+            }
+            this.percentage = Math.round(e.percent)
+            this.onProgress(e, rawFile)
+          }
+        }
+
+        const formData = new FormData()
+
+        formData.append('file', rawFile)
+        // 错误处理
+        xhr.onerror = (err) => {
+          this.onError(err, rawFile)
+        }
+
+        xhr.onload = (e) => {
+          if (xhr.status < 200 || xhr.status >= 300) {
+            return this.onError(this.getError(action, xhr))
+          }
+          this.upSuccess = true
+          this.onSuccess(e, this.getBody(xhr))
+        }
+
+        xhr.open('post', action, true)
+
+        if (this.withCredentials && 'withCredentials' in xhr) {
+          xhr.withCredentials = true
+        }
+        // 设置请求头
+        const headers = this.headers || {}
+        for (let item in headers) {
+          if (headers.hasOwnProperty(item) && headers[item] !== null) {
+            xhr.setRequestHeader(item, headers[item])
+          }
+        }
+        xhr.send(formData)
+      },
+      getError (action, xhr) {
+        let msg
+        if (xhr.response) {
+          msg = `${xhr.status} ${xhr.response.error || xhr.response}`
+        } else if (xhr.responseText) {
+          msg = `${xhr.status} ${xhr.responseText}`
+        } else {
+          msg = `fail to post ${action} ${xhr.status}'`
+        }
+
+        const err = new Error(msg)
+        err.status = xhr.status
+        err.method = 'post'
+        err.url = action
+        return err
+      },
+      getBody (xhr) {
+        const text = xhr.responseText || xhr.response
+        if (!text) {
+          return text
+        }
+
+        try {
+          return JSON.parse(text)
+        } catch (e) {
+          return text
+        }
       }
     }
   }
 </script>
+<style>
+  .up-box {
+    position: relative;
+  }
+  .up-suc {
+    position: absolute;
+    top: 5px;
+    right: -14px;
+    color: #13ce66;
+  }
+  .percent {
+    position: absolute;
+    top: 3px;
+    right: -74px;
+  }
+</style>

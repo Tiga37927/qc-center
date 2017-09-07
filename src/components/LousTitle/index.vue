@@ -3,18 +3,18 @@
     <h3 class="font16">近七日待还</h3>
     <div class="amount_to_pay_money clearfix">
       <div class="left fl font40">
-        <b>2325.00</b>
+        <b>{{ baseInfo.unpaidMoneyOf7Days | initNumber }}</b>
       </div>
-      <button class="fr font16">
+      <button class="fr font16" @click="toPay">
         立即还款
       </button>
     </div>
     <div class="lous_title_progress">
-      <p></p>
+      <p :style="{width: getLousProWidth}"></p>
     </div>
     <div class="total_to_pay color_393a">
       <em class="font14">全部待还：</em>
-      500.00
+      {{ baseInfo.unpaidMoneyOfTotal | initNumber }}
     </div>
   </div>
 </template>
@@ -53,7 +53,6 @@
       background: #b5b5b5;
 
       p {
-        width: 50%;
         height: 100%;
         background: #d71918;
       }
@@ -65,3 +64,26 @@
     }
   }
 </style>
+
+<script>
+export default {
+  props: {
+    //  白条基础信息
+    baseInfo: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  methods: {
+    toPay () {
+      this.$emit('to-pay')
+    }
+  },
+  computed: {
+    //  计算白条消费显示进度条宽度
+    getLousProWidth () {
+      return this.baseInfo.unpaidMoneyOfTotal * 100 / this.baseInfo.maxAmount * 100 / 100 + '%'
+    }
+  }
+}
+</script>

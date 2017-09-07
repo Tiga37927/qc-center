@@ -7,14 +7,14 @@ export default function (str, delay) {
   if (isNaN(delay)) {
     delay = 3000
   }
-  let showTips = document.getElementById('showtips')
+  let showTips = document.getElementById('showTips')
 
   if (!showTips) {
     showTips = document.createElement('div')
     showTips.id = 'showTips'
     const style = {
       background: 'black',
-      padding: '.2rem .4rem',
+      padding: '1rem 1rem',
       color: '#fff',
       position: 'fixed',
       top: '50%',
