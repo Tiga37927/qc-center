@@ -1,12 +1,12 @@
 <template>
-  <div class="out_bill_container">
-    <div class="top">
+  <div class="out_bill_container" v-if="show === 1">
+    <div class="top bg_fff">
       <h3 class="font14">
-        09月累计待还：
-        <em class="font20">6243.33</em>
+        {{ outBillObj.month }}月累计待还：
+        <em class="font20">{{ outBillObj.accumulatedMoneyToRepay | initNumber }}</em>
       </h3>
       <p>
-        记账周期：2017-08-24 至 2017-09-23
+        记账周期：{{ outBillObj.billStartDate }} 至 {{ outBillObj.billEndDate }}
       </p>
       <p>
         出账日期：2017-09-24
@@ -14,7 +14,7 @@
     </div>
 
     <div class="show_tab lous_bill_tab">
-      <table>
+      <table class="bg_fff">
         <tr>
           <th v-for="$index in 4">{{ '未出账单' + $index }}</th>
         </tr>
@@ -37,8 +37,11 @@
 
 <style lang="less">
   .out_bill_container {
-    background: #fff;
+    
 
+    .lous_bill_tab {
+      padding: 0 2px;
+    }
     .top {
       padding: 20px;
       border: 1px solid  #d8dce5;
@@ -58,6 +61,16 @@
 import NoBill from '../NoBill'
 
 export default {
+  props: {
+    outBillObj: {
+      type: Object,
+      default: () => ({})
+    },
+    show: {
+      type: Number
+    }
+  },
+
   data () {
     return {
       noData: '本月暂无账单'

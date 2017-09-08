@@ -5,10 +5,10 @@
         下月账单
       </div>
       <div class="font20">
-        <b>2350.00</b>
+        <b>{{ baseInfo.unpaidMoneyOfNextMon | initNumber }}</b>
       </div>
       <p class="font14">
-        还款日期2017/05/02
+        还款日期{{ baseInfo.repayTime }}
       </p>
     </div>
     <div class="fr box">
@@ -16,10 +16,10 @@
         可用额度
       </div>
       <div class="font20">
-        <b>8000</b>
+        <b>{{ baseInfo.availableBalance | initNumber }}</b>
       </div>
       <p class="font14">
-        总额度15000
+        总额度{{ baseInfo.maxAmount | initNumber }}
       </p>
     </div>
   </div>

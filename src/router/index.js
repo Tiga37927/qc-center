@@ -4,6 +4,7 @@ import view from '@/views'
 // import axios from 'axios'
 import urls from '../api/urls'
 import http from '../api/http'
+import ShowTips from '../components/ShowTips'
 
 const {NotFoundComponent, Center} = view
 
@@ -32,7 +33,7 @@ export default new Router({
                 switch (result) {
                   case 'HAS_APPLY':
                     next({
-                      path: '/lous'
+                      path: '/ious'
                     })
                     break
                   case 'NOT_COMPLETED':
@@ -45,7 +46,7 @@ export default new Router({
                 }
               },
               fail: function (error) {
-                console.log(error)
+                ShowTips(error.msg)
               }
             }
             http(opt)
@@ -68,7 +69,7 @@ export default new Router({
           component: resolve => require(['@/views/VerifyFail.vue'], resolve)
         },
         {
-          path: 'lous',
+          path: 'ious',
           component: resolve => require(['@/views/Lous.vue'], resolve)//  ,
           /*  beforeEnter: (to, from, next) => {
             let opt = {
@@ -98,7 +99,7 @@ export default new Router({
                 }
               },
               fail: function (error) {
-                console.log(error)
+                ShowTips(error.msg)
               }
             }
 

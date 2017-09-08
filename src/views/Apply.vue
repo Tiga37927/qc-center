@@ -166,7 +166,7 @@
           isLoading: false,
           success: function (res) {
             _this.companyName = res.data.companyName
-            _this.area = res.data.area
+            _this.area = res.data.province + res.data.city + res.data.area
             _this.address = res.data.address
           }
         }

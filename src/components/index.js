@@ -12,6 +12,10 @@ import NoBill from './NoBill'
 import Pagination from './Pagination'
 import RepaymentDetails from './RepaymentDetails'
 import PayMethods from './PayMethods'
+import BillLoading from './BillLoading'
+import InputPassWord from './InputPassWord'
+import WXPayBox from './WXPayBox'
+import PayBox from './PayBox'
 import QUpLoad from './QUpLoad'
 import QProgress from './QProgress'
 import QDatePicker from './QDatePicker'
@@ -31,7 +35,12 @@ export {
   Pagination,
   RepaymentDetails,
   PayMethods,
+  BillLoading,
+  InputPassWord,
+  WXPayBox,
+  PayBox,
   QUpLoad,
   QProgress,
   QDatePicker
 }
+

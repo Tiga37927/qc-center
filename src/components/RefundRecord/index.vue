@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_fff">
+  <div class="bg_fff" v-if="show === 3">
     <div class="lous_bill_tab">
       <table>
         <tr>
@@ -29,6 +29,12 @@
 import NoBill from '../NoBill'
 
 export default {
+  props: {
+    show: {
+      type: Number
+    }
+  },
+
   data () {
     return {
       noData: '暂无退款记录'

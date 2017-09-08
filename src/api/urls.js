@@ -29,5 +29,13 @@ export default {
   //  白条基础信息
   lousBaseInfo: {
     dataUrl: prefix + '/iou/creditAccount/baseIouInfo'
+  },
+  //  白条 未出账单
+  unsettled: {
+    dataUrl: prefix + '/iou/creditAccount/bill/unsettled'
+  },
+  //  白条 已出账单
+  comeBill: {
+    dataUrl: prefix + '/iou/creditAccount/bill/present'
   }
 }

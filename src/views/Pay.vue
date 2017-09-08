@@ -27,13 +27,20 @@
         </div>
       </div>
     </div>
-
+    
+    <!-- 余额支付密码 -->
+    <input-pass-word></input-pass-word>
 
     <!-- 立即付款 -->
     <div class="to_pay_btn">
       <button>立即付款</button>
     </div>
 
+    <!-- 微信支付弹层 -->
+    <w-x-pay-box :show="isShowWXPayBox"></w-x-pay-box>
+
+    <!-- 其他支付弹层 -->
+    <pay-box :show="isShowPayBox"></pay-box>
   </div>
 </template>
 
@@ -98,7 +105,10 @@
 <script>
 import {
   RepaymentDetails,
-  PayMethods
+  PayMethods,
+  InputPassWord,
+  WXPayBox,
+  PayBox
 } from '../components'
 
 export default {
@@ -109,13 +119,18 @@ export default {
         {title: '微信支付', name: 'wxPay'},
         {title: '网银支付', name: 'bankPay'},
         {title: '一键支付', name: 'onekeyPay'}
-      ]
+      ],
+      isShowWXPayBox: false,    // 是否显示微信支付
+      isShowPayBox: false       //  是否显示支付弹层
     }
   },
 
   components: {
     RepaymentDetails,
-    PayMethods
+    PayMethods,
+    InputPassWord,
+    WXPayBox,
+    PayBox
   }
 }
 </script>

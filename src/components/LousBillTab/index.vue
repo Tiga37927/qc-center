@@ -21,6 +21,7 @@
   .lous_bill_tab {
     table {
       width: 100%;
+      border-collapse: collapse;
 
       th {
         height: 34px;
@@ -30,7 +31,7 @@
       }
 
       td, th {
-        width: 20%;
+        width: 25%;
         text-align: center;
       }
 

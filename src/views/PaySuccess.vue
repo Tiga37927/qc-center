@@ -4,7 +4,7 @@
       <div class="left fl"></div>
       <div class="right fl">
         <h2 class="font14">
-          白条申请成功，正在审核中…
+          白条还款成功
         </h2>
         <ul>
           <li class="font20" v-for="(item, index) in backList" @click="back(index)">

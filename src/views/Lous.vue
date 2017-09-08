@@ -19,19 +19,19 @@
       ></tab-bar>
 
       <!-- 已出账单 -->
-      <come-bill v-if="!tabIndex"></come-bill>
+      <come-bill :show="tabIndex"></come-bill>
 
       <!-- 未出账单 -->
-      <out-bill v-if="tabIndex === 1"></out-bill>
+      <out-bill :show="tabIndex" :out-bill-obj="getOutBill"></out-bill>
 
       <!-- 还款流水 -->
-      <repayment-stream v-if="tabIndex === 2"></repayment-stream>
+      <repayment-stream :show="tabIndex"></repayment-stream>
 
       <!-- 退款记录 -->
-      <refund-record  v-if="tabIndex === 3"></refund-record>
+      <refund-record  :show="tabIndex"></refund-record>
 
       <!-- 消费明细 -->
-      <consumption-details  v-if="tabIndex === 4"></consumption-details>
+      <consumption-details  :show="tabIndex"></consumption-details>
 
       <!-- 分页 -->
       <pagination
@@ -39,6 +39,9 @@
       :current-page="currentPage"
       :change-callback="changeCallback"
       ></pagination>
+
+      <!-- 查询加载loading -->
+      <bill-loading :show="showBillLoading"></bill-loading>
     </div>
   </div>
 </template>
@@ -52,8 +55,10 @@
     } 
 
     .lous_bill {
+      min-height: 538px;
       padding: 34px 130px 45px 98px;
       background: #fef5e9;
+      position: relative;
     }
   }
 </style>
@@ -69,7 +74,8 @@ import {
   RepaymentStream,
   RefundRecord,
   ConsumptionDetails,
-  Pagination
+  Pagination,
+  BillLoading
 } from '../components'
 
 import { mapActions, mapGetters } from 'vuex'
@@ -82,7 +88,12 @@ export default {
       tabIndex: 0,     //  选项卡记录切换索引
       totalPage: 20,    //  总页数
       currentPage: 1,   //  当前页
-      lousBaseInfoUrl: configUrl.lousBaseInfo.dataUrl     //  白条基础信息URL
+      lousBaseInfoUrl: configUrl.lousBaseInfo.dataUrl,     //  白条基础信息URL
+      lousOutBillUrl: configUrl.unsettled.dataUrl,           //  白条未出账单URL
+      showBillLoading: false,                            //  是否显示加载账单loading
+      comeBillUrl: configUrl.comeBill.dataUrl,            // 白条已出账单URL
+      pageNum: 1,                                       //  第几页
+      pageSize: 3                                       //  每页条数
     }
   },
   components: {
@@ -95,21 +106,39 @@ export default {
     RepaymentStream,
     RefundRecord,
     ConsumptionDetails,
-    Pagination
+    Pagination,
+    BillLoading
   },
   created () {
     //  获取白条基本信息
     this.checkLousBaseInfo()
+
+    //  查询已出账单
+    this.checkComeBill()
   },
   methods: {
     //  vuex actions
-    ...mapActions(['lousBaseInfo']),
+    ...mapActions(['lousBaseInfo', 'outBill', 'comeBill']),
 
     //  修改选项卡索引
     changeTabIndex (index) {
-      //  console.log(index)
+      console.log(index)
       this.tabIndex = index
       this.currentPage = 1
+
+      switch (index) {
+        //  查询已出账单
+        case 0:
+          break
+
+        //  查询未出账单
+        case 1:
+          this.checkOutBill()
+          break
+
+        default:
+          break
+      }
     },
 
     //  页码点击
@@ -134,7 +163,7 @@ export default {
         data: {},
         errMsg: '获取白条基础信息失败',
         success: function (res) {
-          console.log(res)
+          //  console.log(res)
         },
         fail: function (err) {
           console.log(err)
@@ -142,11 +171,52 @@ export default {
       }
 
       this.lousBaseInfo(opt)
+    },
+
+    //  查询未出账单
+    checkOutBill () {
+      let opt = {
+        isLoading: false,
+        type: 'post',
+        url: this.lousOutBillUrl,
+        data: {},
+        errMsg: '查询未出账单失败',
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      }
+
+      this.outBill(opt)
+    },
+
+    //  查询已出账单
+    checkComeBill () {
+      let opt = {
+        loading: false,
+        type: 'post',
+        url: this.comeBillUrl,
+        data: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        },
+        errMsg: '查询已出账单失败',
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      }
+
+      this.comeBill(opt)
     }
   },
 
   computed: {
-    ...mapGetters(['getLousBaseInfo'])
+    ...mapGetters(['getLousBaseInfo', 'getOutBill'])
   }
 }
 </script>

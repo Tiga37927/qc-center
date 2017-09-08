@@ -1,5 +1,5 @@
 <template>
-  <div class="com_bill_container">
+  <div class="com_bill_container" v-if="!show">
     <ul>
       <li v-for="$index in 3">
         <span class="icon">本月账单</span>
@@ -160,6 +160,12 @@ import LousBillTab from '../LousBillTab'
 import TestJson from '../TestTab.json'
 
 export default {
+  props: {
+    show: {
+      type: Number
+    }
+  },
+
   data () {
     return {
       tabTitle: ['订单名称', '订单编号', '订单时间', '订单金额'],
