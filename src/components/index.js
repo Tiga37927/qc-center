@@ -14,6 +14,7 @@ import RepaymentDetails from './RepaymentDetails'
 import PayMethods from './PayMethods'
 import QUpLoad from './QUpLoad'
 import QProgress from './QProgress'
+import QDatePicker from './QDatePicker'
 
 export {
   LousTitle,
@@ -31,5 +32,6 @@ export {
   RepaymentDetails,
   PayMethods,
   QUpLoad,
-  QProgress
+  QProgress,
+  QDatePicker
 }

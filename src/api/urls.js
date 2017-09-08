@@ -18,9 +18,9 @@ export default {
   apply: {
     dataUrl: prefix + '/iou/creditAccount/apply'
   },
-  // 判断资质是否完善
-  isNeedEditCompanyInfo: {
-    dataUrl: prefix + '/iou/creditAccount/isNeedEditCompanyInfo'
+  // 获取申请授权信息
+  authApply: {
+    dataUrl: prefix + '/iou/creditAccount/authApply'
   },
   // 查询用户个人信息
   personInfo: {

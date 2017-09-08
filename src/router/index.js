@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import view from '@/views'
 // import axios from 'axios'
-// import urls from '../api/urls'
-// import http from '../api/http'
+import urls from '../api/urls'
+import http from '../api/http'
 
 const {NotFoundComponent, Center} = view
 
@@ -20,29 +20,36 @@ export default new Router({
       children: [
         {
           path: 'apply',
-          component: resolve => require(['@/views/Apply.vue'], resolve)
-          // beforeEnter: (to, from, next) => {
-          //   let opt = {
-          //     method: 'get',
-          //     url: urls.isNeedEditCompanyInfo.dataUrl,
-          //     isLoading: true,
-          //     success: function (res) {
-          //       let result = res.data.isNeed
-          //       // 是否需要完善公司信息
-          //       if (result === false) {
-          //         next()
-          //       } else if (result === true) {
-          //         next({
-          //           path: '/forbidAply'
-          //         })
-          //       }
-          //     },
-          //     fail: function (error) {
-          //       console.log(error)
-          //     }
-          //   }
-          //   http(opt)
-          // }
+          component: resolve => require(['@/views/Apply.vue'], resolve),
+          beforeEnter: (to, from, next) => {
+            let opt = {
+              method: 'get',
+              url: urls.authApply.dataUrl,
+              isLoading: true,
+              success: function (res) {
+                let result = res.data.auth
+                // 是否需要完善公司信息
+                switch (result) {
+                  case 'HAS_APPLY':
+                    next({
+                      path: '/lous'
+                    })
+                    break
+                  case 'NOT_COMPLETED':
+                    next({
+                      path: '/forbidAply'
+                    })
+                    break
+                  case 'COMPLETED':
+                    next()
+                }
+              },
+              fail: function (error) {
+                console.log(error)
+              }
+            }
+            http(opt)
+          }
         },
         {
           path: 'forbidAply',

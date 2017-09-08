@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 import showLoading from '../components/Loading'
 import showTips from '../components/ShowTips'
 
@@ -10,7 +11,11 @@ export default function (opt) {
   let http = axios({
     method: opt.method.toLocaleLowerCase() || 'get',
     url: opt.url,
-    data: opt.data
+    headers: opt.headers || {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    },
+    responseType: 'json',
+    data: qs.stringify(opt.data)
   }).then(function (response) {
     let result = response.data
     showLoading(false)

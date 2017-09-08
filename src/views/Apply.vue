@@ -61,9 +61,10 @@
       </label>
       <label class="t-label">
         <div class="txt">
+          <em class="t-red">*</em>
           账期日：
         </div>
-        <input class="t-input" type="text" v-model="billDay">
+        <input class="t-input" type="number" max="31" min="1" placeholder="输入账期日1-31" pattern="[1-9][0-9]{0, 1}" maxlength="2" v-model="billDay">
       </label>
     </fieldset>
     <fieldset>
@@ -78,6 +79,8 @@
         <q-up-load class="f-input"
                    :accept="'image/*'"
                    :action="upUrl"
+                   :sizes="10"
+                   :types="'bmp|gif|jpg|png|jpeg|pdf'"
                    :onSuccess="sucBusiness"
                    :onError="errBusiness">
         </q-up-load>
@@ -91,6 +94,8 @@
         <q-up-load class="f-input"
                    :accept="'image/*'"
                    :action="upUrl"
+                   :sizes="10"
+                   :types="'bmp|gif|jpg|png|jpeg|pdf'"
                    :onSuccess="sucAgreement"
                    :onError="errAgreement">
         </q-up-load>
@@ -104,6 +109,8 @@
         <q-up-load class="f-input"
                    :accept="'image/*'"
                    :action="upUrl"
+                   :sizes="10"
+                   :types="'bmp|gif|jpg|png|jpeg|pdf'"
                    :onSuccess="sucCard"
                    :onError="errCard">
         </q-up-load>
@@ -119,11 +126,12 @@
 <script>
   import urls from '../api/urls'
   import http from '../api/http'
-  import { QUpLoad } from '../components'
+  import { QUpLoad, QDatePicker } from '../components'
 
   export default {
     components: {
-      QUpLoad
+      QUpLoad,
+      QDatePicker
     },
     data: function () {
       return {
@@ -188,6 +196,10 @@
           this.tips('请上传白条申请书', 1000)
           return
         }
+        if (!this.billDay || this.billDay === 0 || this.billDay > 31) {
+          this.tips('请输入合法账期日', 1000)
+          return
+        }
         const subData = {
           companyName: this.companyName,
           area: this.area,
@@ -231,7 +243,7 @@
         this.businessLicenseOriginalFileName = res.data.originalFileName
       },
       errBusiness (event, res) {
-        console.log(event, res)
+        this.tips('上传失败，请检查网络！')
       },
       sucAgreement (event, res) {
         this.tips('上传成功！', 1000)
@@ -240,6 +252,7 @@
       },
       errAgreement (event, res) {
         console.log(event, res)
+        this.tips('上传失败，请检查网络！')
       },
       sucCard (event, res) {
         this.tips('上传成功！', 1000)
@@ -248,6 +261,7 @@
       },
       errCard (event, res) {
         console.log(event, res)
+        this.tips('上传失败，请检查网络！')
       }
     }
   }
@@ -277,6 +291,8 @@
           width: 30%;
         }
         .t-input {
+          display: inline-block;
+          vertical-align: middle;
           width: 300px;
           height: 32px;
           border: 1px solid #d6d6d6;
