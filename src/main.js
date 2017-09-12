@@ -7,6 +7,7 @@ import store from './store'
 import showLoading from './mixins/Loading'
 import tips from './mixins/Tips'
 import initNumber from './filter/initNumber'
+require('es6-promise').polyfill()
 
 Vue.filter('initNumber', initNumber)
 

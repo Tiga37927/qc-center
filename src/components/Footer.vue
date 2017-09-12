@@ -10,7 +10,7 @@
       <div class="page1200 clearfix">
         <div class="foot-link-box">
           <div class="foot-hotline-box foot-box">
-            <a href="/control/complaintToService" class="hot-line"></a>
+            <a href="http://www.17cai.com/control/complaintToService" class="hot-line"></a>
           </div>
           <div class="foot-weixin-box foot-box">
             <img src="../assets/images/qrcode72.png" width="110" height="140">
@@ -20,27 +20,27 @@
               <h3>购物指南</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_01">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_01">
                 购物流程
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_02">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_02">
                 会员介绍
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_03">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_03">
                 积分规则
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_04">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=AFH1_04">
                 常见问题
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=A10010">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_1&amp;articleId=A10010">
                 联系客服
               </a>
             </div>
@@ -50,37 +50,37 @@
               <h3>支付/配送方式</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10025">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10025">
                 在线支付
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10089">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10089">
                 余额支付
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=10110">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=10110">
                 兑换券支付
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=10120">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=10120">
                 齐采币说明
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=AFH2_03">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=AFH2_03">
                 公司转账
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10007">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=A10007">
                 配送时间和区域
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=AFH2_06">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_2&amp;articleId=AFH2_06">
                 配送费用
               </a>
             </div>
@@ -90,17 +90,17 @@
               <h3>售后服务</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=A10008">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=A10008">
                 售后服务政策
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=AFH3_02">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=AFH3_02">
                 退货流程
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=AFH3_03">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_3&amp;articleId=AFH3_03">
                 退款说明
               </a>
             </div>
@@ -110,22 +110,22 @@
               <h3>商旅服务</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=AFH4_01">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=AFH4_01">
                 齐采商旅特色
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10071">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10071">
                 商旅服务协议
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10060">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10060">
                 机票常见问题
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10070">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_4&amp;articleId=10070">
                 酒店常见问题
               </a>
             </div>
@@ -135,32 +135,32 @@
               <h3>特色服务</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=A10088">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=A10088">
                 齐采白条
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_02">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_02">
                 商圈服务
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_03">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_03">
                 统一税票
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_04">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_04">
                 定制采购
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_05">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_05">
                 周期购
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_06">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_7&amp;articleId=AFH7_06">
                 复购清单
               </a>
             </div>
@@ -170,32 +170,32 @@
               <h3>合作加盟</h3>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10004">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10004">
                 商家入住
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10006">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10006">
                 品牌介绍
               </a>
             </div>
             <div class="foot-link-i">
-              <a href="/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10005">
+              <a href="http://www.17cai.com/control/showInformation?articleTypeId=FOOTER_HELP_8&amp;articleId=A10005">
                 商圈合伙人
               </a>
             </div>
           </div>
           <div class="add-part">
-            <a target="_blank" href="/control/showInformation?articleId=A10001">齐采介绍</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/showInformation?articleId=A10003">加入齐采</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/showInformation?articleId=A10022">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/showInformation?articleId=A10001">齐采介绍</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/showInformation?articleId=A10003">加入齐采</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/showInformation?articleId=A10022">联系我们</a> &nbsp;&nbsp;|&nbsp;&nbsp;
             <a target="_blank" href="http://www.17cai.com/m/">手机齐采</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/active?activeId=sceneIndex">场景采购</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/active?activeId=sceneIndex">场景采购</a> &nbsp;&nbsp;|&nbsp;&nbsp;
             <a target="_blank" href="http://travel.17cai.com/">齐采商旅</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/active?activeId=community">齐采社群</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/activityTopic?topicId=10020">周期购</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/coinExchangeMall">兑换商城</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a target="_blank" href="/control/active?activeId=message">发布需求</a>
+            <a target="_blank" href="http://www.17cai.com/control/active?activeId=community">齐采社群</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/activityTopic?topicId=10020">周期购</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/coinExchangeMall">兑换商城</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a target="_blank" href="http://www.17cai.com/control/active?activeId=message">发布需求</a>
           </div>
         </div>
       </div>

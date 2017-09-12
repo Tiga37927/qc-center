@@ -11,7 +11,7 @@ export default function (str, delay) {
     showTips.id = 'showTips'
     const style = {
       background: 'black',
-      padding: '1rem 1rem',
+      padding: '14px',
       color: '#fff',
       position: 'fixed',
       top: '50%',
@@ -20,7 +20,7 @@ export default function (str, delay) {
       '-webkit-transform': 'translate(-50%, -50%)',
       'border-radius': '5px',
       'z-index': '10000',
-      'font-size': '.28rem',
+      'font-size': '14px',
       backgroundColor: 'rgba(0,0,0,.7)'
     }
     let keyArr = Object.keys(style)

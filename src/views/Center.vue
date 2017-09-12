@@ -4,7 +4,7 @@
     <aside class="qc-menu">
       <figure>
         <img src="../assets/images/company.jpg" alt="">
-        <figcaption>深圳齐心集团</figcaption>
+        <figcaption>{{companyName}}</figcaption>
       </figure>
       <dl class="qc-menu-list">
         <dt class="qc-menu-item">
@@ -16,6 +16,13 @@
     <router-view class="q-content"></router-view>
   </div>
 </template>
+<script>
+  export default {
+    computed: {
+      companyName: () => sessionStorage.getItem('companyName') || '深圳齐心集团'
+    }
+  }
+</script>
 <style lang="less">
   .qc-menu {
     position: absolute;

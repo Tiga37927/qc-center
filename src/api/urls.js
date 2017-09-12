@@ -1,7 +1,7 @@
 /**
  * Created by yx on 2017/9/5.
  */
-let proPrefix = ''
+let proPrefix = 'http://119.23.138.103:8081/qc-user'
 let devPrefix = 'http://192.168.16.161:8080/qc-user'
 let prefix = process.env.NODE_ENV === 'production' ? proPrefix : devPrefix
 
