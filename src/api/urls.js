@@ -2,7 +2,7 @@
  * Created by yx on 2017/9/5.
  */
 let proPrefix = 'http://119.23.138.103:8081/qc-user'
-let devPrefix = 'http://192.168.16.161:8080/qc-user'
+let devPrefix = 'http://192.168.16.17:8080/qc-user'
 let prefix = process.env.NODE_ENV === 'production' ? proPrefix : devPrefix
 
 export default {
@@ -37,5 +37,17 @@ export default {
   //  白条 已出账单
   comeBill: {
     dataUrl: prefix + '/iou/creditAccount/bill/present'
+  },
+  //  白条 已出账单明细
+  comeBillDetail: {
+    dataUrl: prefix + '/order/bill/info'
+  },
+  //  白条 还款流水
+  repaymentStream: {
+    dataUrl: prefix + '/iou/creditAccount/bill/repayment/record'
+  },
+  //  白条 还款流水
+  consumptionDetails: {
+    dataUrl: prefix + '/order/bill/all/info'
   }
 }

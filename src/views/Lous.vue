@@ -19,24 +19,28 @@
       ></tab-bar>
 
       <!-- 已出账单 -->
-      <come-bill :show="tabIndex"></come-bill>
+      <come-bill
+      :show="tabIndex"
+      :list-obj="getComeBill"
+      @view-come-bill-detail="checkComeBillDetail"
+      ></come-bill>
 
       <!-- 未出账单 -->
       <out-bill :show="tabIndex" :out-bill-obj="getOutBill"></out-bill>
 
       <!-- 还款流水 -->
-      <repayment-stream :show="tabIndex"></repayment-stream>
+      <repayment-stream :show="tabIndex" :list-obj="getRepaymentStream.result" v-if="getRepaymentStream.result"></repayment-stream>
 
       <!-- 退款记录 -->
       <refund-record  :show="tabIndex"></refund-record>
 
       <!-- 消费明细 -->
-      <consumption-details  :show="tabIndex"></consumption-details>
+      <consumption-details  :show="tabIndex" :list-obj="getConsumptionDetails.result" v-if="getConsumptionDetails.result"></consumption-details>
 
       <!-- 分页 -->
       <pagination
       :total-page="totalPage"
-      :current-page="currentPage"
+      :current-page="pageNo"
       :change-callback="changeCallback"
       ></pagination>
 
@@ -86,14 +90,16 @@ export default {
     return {
       tabList: ['已出账单', '未出账单', '还款流水', '退款记录', '消费明细'],    //  选项卡数组
       tabIndex: 0,     //  选项卡记录切换索引
-      totalPage: 20,    //  总页数
-      currentPage: 1,   //  当前页
+      totalPage: 0,    //  总页数
+      pageNo: 1,   //  当前页
       lousBaseInfoUrl: configUrl.lousBaseInfo.dataUrl,     //  白条基础信息URL
       lousOutBillUrl: configUrl.unsettled.dataUrl,           //  白条未出账单URL
-      showBillLoading: false,                            //  是否显示加载账单loading
+      showBillLoading: true,                            //  是否显示加载账单loading
       comeBillUrl: configUrl.comeBill.dataUrl,            // 白条已出账单URL
-      pageNum: 1,                                       //  第几页
-      pageSize: 3                                       //  每页条数
+      comeBillDetailUrl: configUrl.comeBillDetail.dataUrl,    //  白条已出账单明细
+      pageSize: 2,                                         //  每页条数
+      repaymentStreamUrl: configUrl.repaymentStream.dataUrl,     //  白条还款流水
+      consumptionDetailsUrl: configUrl.consumptionDetails.dataUrl   // 消费明细
     }
   },
   components: {
@@ -118,22 +124,42 @@ export default {
   },
   methods: {
     //  vuex actions
-    ...mapActions(['lousBaseInfo', 'outBill', 'comeBill']),
+    ...mapActions(['lousBaseInfo', 'outBill', 'comeBill', 'comeBillDetail', 'repaymentStream', 'consumptionDetails']),
 
     //  修改选项卡索引
     changeTabIndex (index) {
-      console.log(index)
+      //  console.log(index)
       this.tabIndex = index
-      this.currentPage = 1
+      this.pageNo = 1
+      this.totalPage = 0
 
-      switch (index) {
+      //  根据tabIbdex查询对应账单
+      this.checkBillType(index)
+    },
+
+    //  根据tabIbdex查询对应账单
+    checkBillType (tabIndex) {
+      this.showBillLoading = true
+
+      switch (tabIndex) {
         //  查询已出账单
         case 0:
+          this.checkComeBill()
           break
 
         //  查询未出账单
         case 1:
           this.checkOutBill()
+          break
+
+        //  还款流水
+        case 2:
+          this.checkRepaymentStream()
+          break
+
+        //  消费明细
+        case 4:
+          this.checkConsumptionDetails()
           break
 
         default:
@@ -144,7 +170,11 @@ export default {
     //  页码点击
     changeCallback (page) {
       console.log('页码：' + page)
-      this.currentPage = page
+      this.pageNo = page
+      this.totalPage = 0
+
+      //  根据tabIbdex查询对应账单
+      this.checkBillType(this.tabIndex)
     },
 
     //  跳转详情
@@ -175,6 +205,7 @@ export default {
 
     //  查询未出账单
     checkOutBill () {
+      let me = this
       let opt = {
         isLoading: false,
         type: 'post',
@@ -183,9 +214,11 @@ export default {
         errMsg: '查询未出账单失败',
         success: function (res) {
           console.log(res)
+          me.showBillLoading = false
         },
         fail: function (err) {
           console.log(err)
+          me.showBillLoading = false
         }
       }
 
@@ -194,13 +227,44 @@ export default {
 
     //  查询已出账单
     checkComeBill () {
+      //  清空数据
+      this.$store.state.lous.comeBill = {}
+
+      let me = this
       let opt = {
         loading: false,
         type: 'post',
         url: this.comeBillUrl,
         data: {
-          pageNum: this.pageNum,
+          pageNo: this.pageNo,
           pageSize: this.pageSize
+        },
+        errMsg: '查询已出账单失败',
+        success: function (res) {
+          console.log(res)
+          me.showBillLoading = false
+          me.totalPage = res.pages
+        },
+        fail: function (err) {
+          console.log(err)
+          me.showBillLoading = false
+        }
+      }
+
+      this.comeBill(opt)
+    },
+
+    //  查询已出账单明细
+    checkComeBillDetail (msg) {
+      let opt = {
+        loading: false,
+        type: 'post',
+        url: this.comeBillDetailUrl,
+        index: msg.index,
+        data: {
+          pageNo: 1,
+          pageSize: 10,
+          billId: msg.billId
         },
         errMsg: '查询已出账单失败',
         success: function (res) {
@@ -211,12 +275,70 @@ export default {
         }
       }
 
-      this.comeBill(opt)
+      this.comeBillDetail(opt)
+    },
+
+    //  还款流水
+    checkRepaymentStream () {
+      //  清空数据
+      this.$store.state.lous.repaymentStream = {}
+
+      let me = this
+      let opt = {
+        loading: false,
+        type: 'post',
+        url: this.repaymentStreamUrl,
+        data: {
+          pageNo: this.pageNo,
+          pageSize: this.pageSize
+        },
+        errMsg: '查询还款流水失败',
+        success: function (res) {
+          console.log(res)
+          me.showBillLoading = false
+          me.totalPage = res.pages
+        },
+        fail: function (err) {
+          console.log(err)
+          me.showBillLoading = false
+        }
+      }
+
+      this.repaymentStream(opt)
+    },
+
+    //  消费明细
+    checkConsumptionDetails () {
+      //  清空数据
+      this.$store.state.lous.consumptionDetails = {}
+
+      let me = this
+      let opt = {
+        loading: false,
+        type: 'post',
+        url: this.consumptionDetailsUrl,
+        data: {
+          pageNo: this.pageNo,
+          pageSize: this.pageSize
+        },
+        errMsg: '查询消费明细失败',
+        success: function (res) {
+          console.log(res)
+          me.showBillLoading = false
+          me.totalPage = res.pages
+        },
+        fail: function (err) {
+          console.log(err)
+          me.showBillLoading = false
+        }
+      }
+
+      this.consumptionDetails(opt)
     }
   },
 
   computed: {
-    ...mapGetters(['getLousBaseInfo', 'getOutBill'])
+    ...mapGetters(['getLousBaseInfo', 'getComeBill', 'getOutBill', 'getRepaymentStream', 'getConsumptionDetails'])
   }
 }
 </script>

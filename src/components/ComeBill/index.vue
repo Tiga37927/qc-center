@@ -1,48 +1,52 @@
 <template>
   <div class="com_bill_container" v-if="!show">
-    <ul>
-      <li v-for="$index in 3">
-        <span class="icon">本月账单</span>
+    <ul v-if="listObj.rows">
+      <li v-for="(item, index) in listObj.rows">
+        <span class="icon">{{ item.month == nowMonth ? '本' : item.month }}月账单</span>
         <div class="main">
           <div class="content">
             <div class="total_info">
               <div class="top">
                 <dl>
                   <dt class="font14">
-                    账单总额：<em class="font20">919.11</em>
+                    账单总额：<em class="font20">{{ (item.totalBillMoney || 0) | initNumber }}</em>
                   </dt>
                   <dd>
-                    记账周期：2017-02-05至2017-05-05
+                    记账周期：{{ item.billStartDate }}至{{ item.billEndDate }}
                   </dd>
                   <dd>
-                    出账日期：2017-05-09
+                    出账日期：{{ item.billGeneratedDate }}
                   </dd>
                 </dl>
               </div>
 
               <div class="bottom">
                 <p>
-                  剩余待还：920.00
+                  剩余待还：{{ (item.remainingMoneyToRePay || 0) | initNumber }}
                 </p>
                 <p>
-                  最后还款日：2017-05-05
+                  最后还款日：{{ item.lastRepayDate }}
                 </p>
-                <img src="../../assets/images/paid-off.png" alt="已还清">
+                <img v-if="item.billStatus === 'BILL_ALREADY_PAID'" src="../../assets/images/paid-off.png" alt="已还清">
               </div>
 
-              <a href="javascript:;" class="font14 view_detail">查看消费明细</a>
-              <a class="put font14 hide" href="javascript:;">收起</a>
+              <a href="javascript:;" class="font14 view_detail" @click="viewComeBillDetail(item.billId, index)" v-if="!item.isShowDetail">查看消费明细</a>
+              <a class="view_detail font14" href="javascript:;" v-else @click="hideDetial(item)">收起</a>
             </div>
 
             <!-- 表格 -->
             <lous-bill-tab
-            :tab-list="tabList"
+            :tab-list="item.detailList"
             :tab-title="tabTitle"
+            :show="item.isShowDetail"
             ></lous-bill-tab>
           </div>
         </div>
       </li>
     </ul>
+    
+    <!-- 没有数据时 -->
+    <no-bill v-if="listObj.rows && !listObj.rows.length" :no-data="noData"></no-bill>
   </div>
 </template>
 
@@ -139,10 +143,6 @@
               color: #DF3735;
               text-decoration: underline;
             }
-
-            a.put {
-              color: #929090;
-            }
           }
         }
       }
@@ -158,23 +158,47 @@
 <script>
 import LousBillTab from '../LousBillTab'
 import TestJson from '../TestTab.json'
+import NoBill from '../NoBill'
 
 export default {
   props: {
     show: {
       type: Number
+    },
+    listObj: {
+      type: Object,
+      default: {}
     }
   },
 
   data () {
     return {
       tabTitle: ['订单名称', '订单编号', '订单时间', '订单金额'],
-      tabList: TestJson.detailsInfo
+      tabList: TestJson.detailsInfo,
+      noData: '暂无账单',
+      nowMonth: new Date().getMonth() + 1     //  本月
     }
   },
 
   components: {
-    LousBillTab
+    LousBillTab,
+    NoBill
+  },
+
+  methods: {
+    //  查询账单明细
+    viewComeBillDetail (billId, index) {
+      let msg = {
+        billId: billId,
+        index: index
+      }
+      this.$emit('view-come-bill-detail', msg)
+    },
+
+    //  隐藏显示详情
+    hideDetial (item) {
+      this.$set(item, 'isShowDetail', false)
+    }
   }
 }
 </script>

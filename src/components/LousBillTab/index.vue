@@ -1,17 +1,17 @@
 <template>
-  <div class="lous_bill_tab">
+  <div class="lous_bill_tab" v-show="tabList.rows && show">
     <table>
       <tr>
         <th :class="'td' + (index + 1)" v-for="(item, index) in tabTitle">{{ item }}</th>
       </tr>
 
-      <tr v-for="(item, index) in tabList">
+      <tr v-for="(item, index) in tabList.rows">
         <td class="td1">
-          <div class="overfl-oneline">{{item.productName}}</div>
+          <div class="overfl-oneline">{{item.orderDesc}}</div>
         </td>
         <td>{{item.orderId}}</td>
-        <td>{{item.consumerDate}}</td>
-        <td>{{item.orderAmount}}</td>
+        <td>{{item.orderDate}}</td>
+        <td>{{item.orderMoney | initNumber}}</td>
       </tr>
     </table>
   </div>
@@ -66,8 +66,13 @@ export default {
     },
 
     tabList: {
-      type: Array,
-      default: []
+      type: Object,
+      default: {}
+    },
+
+    show: {
+      type: Boolean,
+      default: false
     }
   }
 }

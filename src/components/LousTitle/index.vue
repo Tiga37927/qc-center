@@ -30,6 +30,7 @@
     .amount_to_pay_money {
       width: 376px;
       margin-bottom: 5px;
+      min-height: 52px;
 
       .fr {
         width: 88px;

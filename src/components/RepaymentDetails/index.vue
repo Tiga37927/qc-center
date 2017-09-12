@@ -43,7 +43,7 @@
 
 		.fl {
 			width: 126px;
-			padding: 0 5px;
+			/* padding: 0 5px; */
 			color: #030000;
 			line-height: 25px;
 

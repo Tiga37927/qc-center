@@ -9,11 +9,11 @@
         记账周期：{{ outBillObj.billStartDate }} 至 {{ outBillObj.billEndDate }}
       </p>
       <p>
-        出账日期：2017-09-24
+        出账日期：{{ outBillObj.billGeneratedDate }}
       </p>
     </div>
-
-    <div class="show_tab lous_bill_tab">
+ 
+    <div class="show_tab lous_bill_tab hide">
       <table class="bg_fff">
         <tr>
           <th v-for="$index in 4">{{ '未出账单' + $index }}</th>

@@ -3,22 +3,22 @@
     <div class="lous_bill_tab">
       <table>
         <tr>
-          <th v-for="$index in 4">{{ '消费明细' + $index }}</th>
+          <th v-for="item in titleList">{{ item }}</th>
         </tr>
 
-        <tr v-for="$index in 4">
+        <tr  v-for="item in listObj.rows">
           <td class="td1">
-            <div class="overfl-oneline">{{'商品名称'}}</div>
+            <div class="overfl-oneline">{{ item.orderDesc }}</div>
           </td>
-          <td>{{31232312321}}</td>
-          <td>{{'2017-05-08'}}</td>
-          <td>{{645}}</td>
+          <td>{{ item.orderId }}</td>
+          <td>{{ item.orderDate }}</td>
+          <td>{{ item.orderMoney | initNumber }}</td>
         </tr>
       </table>
     </div>
 
     <!-- 没有数据显示 -->
-    <no-bill class="hide" :no-data="noData"></no-bill>
+    <no-bill :no-data="noData" v-if="!listObj.rows.length"></no-bill>
   </div>
 </template>
 
@@ -32,12 +32,17 @@ export default {
   props: {
     show: {
       type: Number
+    },
+    listObj: {
+      type: Object,
+      default: {}
     }
   },
 
   data () {
     return {
-      noData: '暂无消费明细'
+      noData: '暂无消费明细',
+      titleList: ['订单名称', '订单编号', '消费时间', '订单金额(元)']
     }
   },
 

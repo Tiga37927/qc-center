@@ -12,7 +12,7 @@
     background: #fff;
     padding-top: 120px;
     position: absolute;
-    top: 144px;
+    top: 142px;
     left: 98px;
     z-index: 100;
 

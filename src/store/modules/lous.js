@@ -1,10 +1,13 @@
 import * as types from '../mutation-types'
 import $fetch from '../../api/request'
+import Vue from 'vue'
 
 const state = {
   lousBaseInfo: {},      //  白条基础信息
   outBill: {},             //  未出账单
-  comeBill: {}            //  已出账单
+  comeBill: {},            //  已出账单
+  repaymentStream: {},       //  还款流水
+  consumptionDetails: {}    //  消费明细
 }
 
 const getters = {
@@ -15,7 +18,13 @@ const getters = {
   getOutBill: state => state.outBill,
 
   //  已出账单
-  getComeBill: state => state.outBill
+  getComeBill: state => state.comeBill,
+
+  //  还款流水
+  getRepaymentStream: state => state.repaymentStream,
+
+  //  消费明细
+  getConsumptionDetails: state => state.consumptionDetails
 }
 
 const actions = {
@@ -38,6 +47,39 @@ const actions = {
     $fetch(opt).then((res) => {
       commit(types.COME_BILL, res)
     })
+  },
+
+  //  白条已出账单 明细
+  comeBillDetail ({ commit, state }, opt) {
+    $fetch(opt).then((res) => {
+      let data = {
+        result: res,
+        index: opt.index
+      }
+      commit(types.COME_BILL_DETAIL, data)
+    })
+  },
+
+  //  白条还款流水
+  repaymentStream ({ commit, state }, opt) {
+    $fetch(opt).then((res) => {
+      let data = {
+        result: res,
+        index: opt.index
+      }
+      commit(types.REPAYMENT_STREAM, data)
+    })
+  },
+
+  //  消费明细
+  consumptionDetails ({ commit, state }, opt) {
+    $fetch(opt).then((res) => {
+      let data = {
+        result: res,
+        index: opt.index
+      }
+      commit(types.CONSUMPTION_DETAILS, data)
+    })
   }
 }
 
@@ -54,7 +96,40 @@ const mutations = {
 
   //  白条已出账单
   [types.COME_BILL] (state, data) {
-    state.COME_BILL = data
+    let list = data.rows
+
+    list.forEach(function (item) {
+      item['detailList'] = {}
+      item['isShowDetail'] = false
+    })
+
+    state.comeBill = data
+  },
+
+  //  白条已出账单 明细
+  [types.COME_BILL_DETAIL] (state, data) {
+    let index = data.index
+    let obj = data.result
+
+    //  复制详情表格
+    state.comeBill['rows'][index]['detailList'] = obj
+
+    //  设置是否显示详情参数
+    state.comeBill['rows'][index]['isShowDetail'] = true
+
+    //  更新视图
+    var newObj = state.comeBill['rows'][index]
+    Vue.set(state.comeBill['rows'], index, newObj)
+  },
+
+  //  还款流水
+  [types.REPAYMENT_STREAM] (state, data) {
+    state.repaymentStream = data
+  },
+
+  //  消费明细
+  [types.CONSUMPTION_DETAILS] (state, data) {
+    state.consumptionDetails = data
   }
 }
 
