@@ -29,13 +29,13 @@
       <out-bill :show="tabIndex" :out-bill-obj="getOutBill"></out-bill>
 
       <!-- 还款流水 -->
-      <repayment-stream :show="tabIndex" :list-obj="getRepaymentStream.result" v-if="getRepaymentStream.result"></repayment-stream>
+      <repayment-stream :show="tabIndex" :list-obj="getRepaymentStream"></repayment-stream>
 
       <!-- 退款记录 -->
-      <refund-record  :show="tabIndex"></refund-record>
+      <refund-record  :show="tabIndex" :list-obj="getRefundRecord"></refund-record>
 
       <!-- 消费明细 -->
-      <consumption-details  :show="tabIndex" :list-obj="getConsumptionDetails.result" v-if="getConsumptionDetails.result"></consumption-details>
+      <consumption-details  :show="tabIndex" :list-obj="getConsumptionDetails"></consumption-details>
 
       <!-- 分页 -->
       <pagination
@@ -97,9 +97,10 @@ export default {
       showBillLoading: true,                            //  是否显示加载账单loading
       comeBillUrl: configUrl.comeBill.dataUrl,            // 白条已出账单URL
       comeBillDetailUrl: configUrl.comeBillDetail.dataUrl,    //  白条已出账单明细
-      pageSize: 2,                                         //  每页条数
+      pageSize: 3,                                         //  每页条数
       repaymentStreamUrl: configUrl.repaymentStream.dataUrl,     //  白条还款流水
-      consumptionDetailsUrl: configUrl.consumptionDetails.dataUrl   // 消费明细
+      consumptionDetailsUrl: configUrl.consumptionDetails.dataUrl,   // 消费明细
+      refundRecordUrl: configUrl.refundRecord.dataUrl               // 退款记录
     }
   },
   components: {
@@ -124,7 +125,7 @@ export default {
   },
   methods: {
     //  vuex actions
-    ...mapActions(['lousBaseInfo', 'outBill', 'comeBill', 'comeBillDetail', 'repaymentStream', 'consumptionDetails']),
+    ...mapActions(['lousBaseInfo', 'outBill', 'comeBill', 'comeBillDetail', 'repaymentStream', 'consumptionDetails', 'refundRecord']),
 
     //  修改选项卡索引
     changeTabIndex (index) {
@@ -132,6 +133,12 @@ export default {
       this.tabIndex = index
       this.pageNo = 1
       this.totalPage = 0
+
+      if (!index) {
+        this.pageSize = 3
+      } else {
+        this.pageSize = 5
+      }
 
       //  根据tabIbdex查询对应账单
       this.checkBillType(index)
@@ -163,6 +170,7 @@ export default {
           break
 
         default:
+          this.checkRefundRecord()
           break
       }
     },
@@ -334,11 +342,40 @@ export default {
       }
 
       this.consumptionDetails(opt)
+    },
+
+    //  退款记录
+    checkRefundRecord () {
+      //  清空数据
+      this.$store.state.lous.refundRecord = {}
+
+      let me = this
+      let opt = {
+        loading: false,
+        type: 'post',
+        url: this.refundRecordUrl,
+        data: {
+          pageNo: this.pageNo,
+          pageSize: this.pageSize
+        },
+        errMsg: '查询退款记录失败',
+        success: function (res) {
+          console.log(res)
+          me.showBillLoading = false
+          me.totalPage = res.pages
+        },
+        fail: function (err) {
+          console.log(err)
+          me.showBillLoading = false
+        }
+      }
+
+      this.refundRecord(opt)
     }
   },
 
   computed: {
-    ...mapGetters(['getLousBaseInfo', 'getComeBill', 'getOutBill', 'getRepaymentStream', 'getConsumptionDetails'])
+    ...mapGetters(['getLousBaseInfo', 'getComeBill', 'getOutBill', 'getRepaymentStream', 'getConsumptionDetails', 'getRefundRecord'])
   }
 }
 </script>

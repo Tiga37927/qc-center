@@ -1,5 +1,5 @@
 <template>
-  <div class="bg_fff" v-if="show === 4">
+  <div class="bg_fff" v-if="show === 4 && listObj.rows">
     <div class="lous_bill_tab">
       <table>
         <tr>

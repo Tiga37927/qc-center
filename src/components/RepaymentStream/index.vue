@@ -1,6 +1,6 @@
 <template>
-  <div class="repayment_stream_container bg_fff" v-if="show === 2">
-    <div class="lous_bill_tab" v-if="listObj.rows && listObj.rows.length">
+  <div class="repayment_stream_container bg_fff" v-if="show === 2 && listObj.rows">
+    <div class="lous_bill_tab" v-if="listObj.rows.length">
       <table>
         <tr>
           <th v-for="item in titleList">{{ item }}</th>

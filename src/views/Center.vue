@@ -3,7 +3,7 @@
   <div class="page1200 clearfix">
     <aside class="qc-menu">
       <figure>
-        <img src="../assets/images/company.jpg" alt="">
+        <img src="../assets/images/company.png" alt="">
         <figcaption>{{companyName}}</figcaption>
       </figure>
       <dl class="qc-menu-list">
@@ -19,7 +19,7 @@
 <script>
   export default {
     computed: {
-      companyName: () => sessionStorage.getItem('companyName') || '深圳齐心集团'
+      companyName: () => JSON.parse(sessionStorage.getItem('user')).companyName || '深圳齐心集团'
     }
   }
 </script>

@@ -7,7 +7,8 @@ const state = {
   outBill: {},             //  未出账单
   comeBill: {},            //  已出账单
   repaymentStream: {},       //  还款流水
-  consumptionDetails: {}    //  消费明细
+  consumptionDetails: {},    //  消费明细
+  refundRecord: {}          //  退款记录
 }
 
 const getters = {
@@ -24,7 +25,10 @@ const getters = {
   getRepaymentStream: state => state.repaymentStream,
 
   //  消费明细
-  getConsumptionDetails: state => state.consumptionDetails
+  getConsumptionDetails: state => state.consumptionDetails,
+
+  //  退款记录
+  getRefundRecord: state => state.refundRecord
 }
 
 const actions = {
@@ -63,22 +67,21 @@ const actions = {
   //  白条还款流水
   repaymentStream ({ commit, state }, opt) {
     $fetch(opt).then((res) => {
-      let data = {
-        result: res,
-        index: opt.index
-      }
-      commit(types.REPAYMENT_STREAM, data)
+      commit(types.REPAYMENT_STREAM, res)
     })
   },
 
   //  消费明细
   consumptionDetails ({ commit, state }, opt) {
     $fetch(opt).then((res) => {
-      let data = {
-        result: res,
-        index: opt.index
-      }
-      commit(types.CONSUMPTION_DETAILS, data)
+      commit(types.CONSUMPTION_DETAILS, res)
+    })
+  },
+
+  //  退款记录
+  refundRecord ({ commit, state }, opt) {
+    $fetch(opt).then((res) => {
+      commit(types.REFUND_RECORD, res)
     })
   }
 }
@@ -130,6 +133,11 @@ const mutations = {
   //  消费明细
   [types.CONSUMPTION_DETAILS] (state, data) {
     state.consumptionDetails = data
+  },
+
+  //  退款记录
+  [types.REFUND_RECORD] (state, data) {
+    state.refundRecord = data
   }
 }
 

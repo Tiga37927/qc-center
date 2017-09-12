@@ -69,9 +69,9 @@
 
   export default {
     computed: {
-      level: () => sessionStorage.getItem('user') || 'V0',
-      coinAmount: () => sessionStorage.getItem('coinAmount') || '0',
-      userName: () => sessionStorage.getItem('userName') || '齐采用户'
+      level: () => JSON.parse(sessionStorage.getItem('user')).level || 'V0',
+      coinAmount: () => JSON.parse(sessionStorage.getItem('user')).coinAmount || '0',
+      userName: () => JSON.parse(sessionStorage.getItem('user')).userName || '齐采用户'
     },
     mounted () {
       this.init()
@@ -82,7 +82,7 @@
           url: url.personInfo.dataUrl,
           method: 'get',
           success: function (res) {
-            sessionStorage.setItem('user', res.data)
+            sessionStorage.setItem('user', JSON.stringify(res.data))
           },
           fail: function (res) {
             this.tips(res.msg, 2000)

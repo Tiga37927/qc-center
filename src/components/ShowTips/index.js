@@ -1,14 +1,11 @@
 let timer = null
 
-export default function (str, delay) {
-  if (isNaN(delay)) {
-    delay = 3000
-  }
+export default function (str, delay = 2000) {
   let showTips = document.getElementById('showtips')
 
   if (!showTips) {
     showTips = document.createElement('div')
-    showTips.id = 'showTips'
+    showTips.id = 'showtips'
     const style = {
       background: 'black',
       padding: '14px',
