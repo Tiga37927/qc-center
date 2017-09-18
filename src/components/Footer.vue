@@ -292,7 +292,7 @@
       float: left;
       margin-left: 40px;
       text-align: left;
-      height: 185px;
+      height: 218px;
       overflow: hidden;
       h3{
         font-size: 18px;

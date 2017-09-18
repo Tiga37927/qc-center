@@ -1,8 +1,8 @@
 /**
  * Created by yx on 2017/9/5.
  */
-let proPrefix = 'http://119.23.138.103:8081/qc-user'
-let devPrefix = 'http://192.168.16.161:8080/qc-user'
+let proPrefix = 'http://vip.17cai.com/qc-user/security'
+let devPrefix = 'http://192.168.16.161:8080/qc-user/security'
 let prefix = process.env.NODE_ENV === 'production' ? proPrefix : devPrefix
 
 export default {
@@ -53,5 +53,33 @@ export default {
   //  白条 退款记录
   refundRecord: {
     dataUrl: prefix + '/order/refund/record'
+  },
+  //  白条还款明细
+  repaymentDetails: {
+    dataUrl: prefix + '/iou/creditAccount/bill/repayment/info'
+  },
+  //  获取支付方式
+  getAllPay: {
+    dataUrl: prefix + '/pay/get_all_pay'
+  },
+  //  支付宝支付
+  aliPay: {
+    dataUrl: prefix + '/pay/ali_pay'
+  },
+  //  微信支付
+  wxPay: {
+    dataUrl: prefix + '/pay/wx_pay'
+  },
+  //  一键支付
+  yeePay: {
+    dataUrl: prefix + '/pay/yee_pay'
+  },
+  //  商城余额支付
+  mallPay: {
+    dataUrl: prefix + '/pay/mall_bal_pay'
+  },
+  //  查询还款状态
+  checkBillStatus: {
+    dataUrl: prefix + '/pay/isBillsRepaySuccess'
   }
 }

@@ -33,17 +33,21 @@ export default function fetch (opt) {
         resolve(data)
         opt.success(data)
       } else {
-        let errMsg = res.data.msg
+        let errMsg = res.data.msg || res.data
         reject(errMsg)
         opt.fail(errMsg)
-        showTips(opt.errMsg)
+        if (opt.errMsg) {
+          showTips(opt.errMsg)
+        }
       }
     })
     .catch(function (err) {
       showLoading(false)
       reject(err)
       opt.fail(err)
-      showTips(opt.errMsg)
+      if (opt.errMsg) {
+        showTips(opt.errMsg)
+      }
     })
   })
 }

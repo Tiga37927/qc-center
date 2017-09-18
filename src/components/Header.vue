@@ -9,9 +9,9 @@
         <ul class="nav-list clearfix">
           <li class="nav-item">
             您好，
-            <a href="http://www.17cai.com/control/memberCenter" target="_blank">{{userName}}</a>
-            <a class="level" href="javascript:;" target="_blank">{{level}}</a>
-            <a class="coin" href="javascript:;" target="_blank">{{coinAmount}}齐采币</a>
+            <a href="http://www.17cai.com/control/memberCenter" target="_blank">{{userName || '用户'}}</a>
+            <a class="level" href="javascript:;" target="_blank">{{level || 'v0'}}</a>
+            <a class="coin" href="javascript:;" target="_blank">{{coinAmount || '0'}}齐采币</a>
             <a class="t-red" href="http://www.17cai.com/control/logout" target="_blank">退出</a>
           </li>
           <li class="nav-item">
@@ -64,31 +64,12 @@
   </Header>
 </template>
 <script>
-  import http from '../api/http'
-  import url from '../api/urls'
-
   export default {
-    computed: {
-      level: () => JSON.parse(sessionStorage.getItem('user')).level || 'V0',
-      coinAmount: () => JSON.parse(sessionStorage.getItem('user')).coinAmount || '0',
-      userName: () => JSON.parse(sessionStorage.getItem('user')).userName || '齐采用户'
-    },
-    mounted () {
-      this.init()
-    },
-    methods: {
-      init () {
-        let opt = {
-          url: url.personInfo.dataUrl,
-          method: 'get',
-          success: function (res) {
-            sessionStorage.setItem('user', JSON.stringify(res.data))
-          },
-          fail: function (res) {
-            this.tips(res.msg, 2000)
-          }
-        }
-        http(opt)
+    data: function () {
+      return {
+        level: window.user ? window.user.level : 'v0',
+        coinAmount: window.user ? window.user.coinAmount : '0',
+        userName: window.user ? window.user.userName : '齐采用户'
       }
     }
   }

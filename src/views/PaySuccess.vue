@@ -73,6 +73,8 @@ export default {
       if (!index) {
         console.log(index)
         window.location.href = 'http://www.17cai.com'
+      } else {
+        window.location.href = 'http://www.17cai.com/control/memberCenter'
       }
     }
   }

@@ -11,7 +11,7 @@ const {NotFoundComponent, Center} = view
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',
@@ -70,8 +70,8 @@ export default new Router({
         },
         {
           path: 'ious',
-          component: resolve => require(['@/views/Lous.vue'], resolve)//  ,
-          /*  beforeEnter: (to, from, next) => {
+          component: resolve => require(['@/views/Lous.vue'], resolve),
+          beforeEnter: (to, from, next) => {
             let opt = {
               method: 'get',
               url: urls.getIouStatus.dataUrl,
@@ -104,7 +104,7 @@ export default new Router({
             }
 
             http(opt)
-          } */
+          }
         },
         // 申请页成功面
         {
@@ -129,6 +129,12 @@ export default new Router({
       path: '/paySuccess',
       name: 'paySuccess',
       component: resolve => require(['@/views/PaySuccess.vue'], resolve)
+    },
+    //  支付跳转页面
+    {
+      path: '/payHref',
+      name: 'payHref',
+      component: resolve => require(['@/views/payHref.vue'], resolve)
     }
   ]
 })

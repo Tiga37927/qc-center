@@ -4,6 +4,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import cart from './modules/demo'
 import lous from './modules/lous'
+import pay from './modules/pay'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     cart,
-    lous
+    lous,
+    pay
   }
 })

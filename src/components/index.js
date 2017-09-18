@@ -19,6 +19,7 @@ import PayBox from './PayBox'
 import QUpLoad from './QUpLoad'
 import QProgress from './QProgress'
 import QDatePicker from './QDatePicker'
+import showTips from './ShowTips'
 
 export {
   LousTitle,
@@ -41,6 +42,7 @@ export {
   PayBox,
   QUpLoad,
   QProgress,
-  QDatePicker
+  QDatePicker,
+  showTips
 }
 

@@ -4,7 +4,7 @@
     <aside class="qc-menu">
       <figure>
         <img src="../assets/images/company.png" alt="">
-        <figcaption>{{companyName}}</figcaption>
+        <figcaption>{{companyName || '深圳齐心集团'}}</figcaption>
       </figure>
       <dl class="qc-menu-list">
         <dt class="qc-menu-item">
@@ -18,8 +18,10 @@
 </template>
 <script>
   export default {
-    computed: {
-      companyName: () => JSON.parse(sessionStorage.getItem('user')).companyName || '深圳齐心集团'
+    data: function () {
+      return {
+        companyName: window.user ? window.user.companyName : '深圳齐心集团'
+      }
     }
   }
 </script>
@@ -72,7 +74,8 @@
       }
     }
   }
+
   .q-content {
-    margin-left: 266px!important;
+    margin-left: 266px !important;
   }
 </style>

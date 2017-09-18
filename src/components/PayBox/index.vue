@@ -2,8 +2,8 @@
   <div class="pay_box_container" v-show="show">
     <div class="box">
       <div class="title clearfix">
-        <span class="fl font14">支付宝支付</span>
-        <span class="fr"></span>
+        <span class="fl font14">{{ payTitle }}支付</span>
+        <span class="fr" @click="cancelBox"></span>
       </div>
       <div class="content">
         <h2>
@@ -18,8 +18,8 @@
       </div>
 
       <div class="footer">
-        <a href="javascript:;" class="pay_success">付款成功</a>
-        <a href="javascript:;">付款失败</a>
+        <a href="javascript:;" class="pay_success" @click="paySuccess">付款成功</a>
+        <a href="javascript:;" @click="cancelBox">付款失败</a>
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
 
   .box {
     width: 356px;
@@ -138,6 +139,22 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+    payTitle: {
+      type: String,
+      default: ''
+    },
+    //  关闭弹层
+    hidePayBox: {
+      type: Function
+    }
+  },
+  methods: {
+    cancelBox () {
+      this.hidePayBox()
+    },
+    paySuccess () {
+      this.$emit('pay-success')
     }
   }
 }

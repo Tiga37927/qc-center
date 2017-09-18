@@ -6,9 +6,9 @@
           <div class="wx_pay_src_content_container">
               <h2>请打开微信扫码支付</h2>
               <div class="photo">
-                  <!-- <img src="wx_pay_src"  alt="微信支付"> -->
+                  <img :src="imgUrl"  alt="微信支付">
               </div>
-              <span></span>
+              <span @click="cancel"></span>
           </div>
       </div>
   </div>
@@ -117,6 +117,20 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+    //  二维码图片
+    imgUrl: {
+      type: String,
+      default: ''
+    },
+    //  关闭弹层
+    hideBox: {
+      type: Function
+    }
+  },
+  methods: {
+    cancel () {
+      this.hideBox()
     }
   }
 }
