@@ -243,7 +243,7 @@ export default {
     //  立即付款
     toPayMoney () {
       let billIds = this.billIds
-
+      let pathname = location.pathname
       //  console.log(billIds)
       let data = {
         billIds: billIds
@@ -255,7 +255,7 @@ export default {
           //  console.log(billIds.join(''))
           this.isShowPayBox = true
           this.payTitle = '支付宝'
-          window.open().location = '/#/payHref?billIds=' + billIds.join('-') + '&type=aliPay'
+          window.open().location = pathname + '#/payHref?billIds=' + billIds.join('-') + '&type=aliPay'
           return
 
         //  微信支付
@@ -301,7 +301,7 @@ export default {
         default:
           this.isShowPayBox = true
           this.payTitle = '一键'
-          window.open().location = '/#/payHref?billIds=' + billIds.join('-') + '&type=oneKeyPay'
+          window.open().location = pathname + '#/payHref?billIds=' + billIds.join('-') + '&type=oneKeyPay'
           return
       }
 

@@ -17,6 +17,7 @@ export default new Router({
       path: '/',
       name: 'Center',
       component: Center,
+      redirect: {name: 'ious'},
       // 嵌套路由
       children: [
         {
@@ -70,6 +71,7 @@ export default new Router({
         },
         {
           path: 'ious',
+          name: 'ious',
           component: resolve => require(['@/views/Lous.vue'], resolve),
           beforeEnter: (to, from, next) => {
             let opt = {
